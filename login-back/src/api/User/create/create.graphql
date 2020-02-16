@@ -1,0 +1,7 @@
+type Mutation {
+    create(email : String!, password: String!, name: String!) : Boolean!
+}
+
+type Query {
+    hello : String!
+} 
