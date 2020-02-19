@@ -7,6 +7,9 @@ export default{
     Mutation : {
         create : async (_, args) => {
             const {name, email, password} = args;
+            // console.log("name : ", name)
+            // console.log("email : ", email)
+            // console.log("password : ", password)
             const exists = await prisma.$exists.user({ OR : [{name}, {email}]});
             if(exists){
                 throw Error("이메일 또는 이름 중복")

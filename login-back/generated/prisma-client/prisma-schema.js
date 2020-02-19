@@ -55,6 +55,7 @@ type User {
   name: String!
   email: String!
   password: String!
+  verify: Boolean!
 }
 
 type UserConnection {
@@ -68,6 +69,7 @@ input UserCreateInput {
   name: String!
   email: String!
   password: String!
+  verify: Boolean!
 }
 
 type UserEdge {
@@ -84,6 +86,8 @@ enum UserOrderByInput {
   email_DESC
   password_ASC
   password_DESC
+  verify_ASC
+  verify_DESC
 }
 
 type UserPreviousValues {
@@ -91,6 +95,7 @@ type UserPreviousValues {
   name: String!
   email: String!
   password: String!
+  verify: Boolean!
 }
 
 type UserSubscriptionPayload {
@@ -115,12 +120,14 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
+  verify: Boolean
 }
 
 input UserUpdateManyMutationInput {
   name: String
   email: String
   password: String
+  verify: Boolean
 }
 
 input UserWhereInput {
@@ -180,6 +187,8 @@ input UserWhereInput {
   password_not_starts_with: String
   password_ends_with: String
   password_not_ends_with: String
+  verify: Boolean
+  verify_not: Boolean
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]

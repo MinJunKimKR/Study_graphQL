@@ -1,0 +1,3 @@
+type Mutation {
+    vertify(id : String!) : Boolean!
+}

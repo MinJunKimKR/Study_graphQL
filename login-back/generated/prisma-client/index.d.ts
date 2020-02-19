@@ -109,7 +109,9 @@ export type UserOrderByInput =
   | "email_ASC"
   | "email_DESC"
   | "password_ASC"
-  | "password_DESC";
+  | "password_DESC"
+  | "verify_ASC"
+  | "verify_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
@@ -176,6 +178,8 @@ export interface UserWhereInput {
   password_not_starts_with?: Maybe<String>;
   password_ends_with?: Maybe<String>;
   password_not_ends_with?: Maybe<String>;
+  verify?: Maybe<Boolean>;
+  verify_not?: Maybe<Boolean>;
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
   OR?: Maybe<UserWhereInput[] | UserWhereInput>;
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
@@ -186,18 +190,21 @@ export interface UserCreateInput {
   name: String;
   email: String;
   password: String;
+  verify: Boolean;
 }
 
 export interface UserUpdateInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
+  verify?: Maybe<Boolean>;
 }
 
 export interface UserUpdateManyMutationInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
+  verify?: Maybe<Boolean>;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -220,6 +227,7 @@ export interface User {
   name: String;
   email: String;
   password: String;
+  verify: Boolean;
 }
 
 export interface UserPromise extends Promise<User>, Fragmentable {
@@ -227,6 +235,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   name: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
+  verify: () => Promise<Boolean>;
 }
 
 export interface UserSubscription
@@ -236,6 +245,7 @@ export interface UserSubscription
   name: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
+  verify: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface UserNullablePromise
@@ -245,6 +255,7 @@ export interface UserNullablePromise
   name: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
+  verify: () => Promise<Boolean>;
 }
 
 export interface UserConnection {
@@ -370,6 +381,7 @@ export interface UserPreviousValues {
   name: String;
   email: String;
   password: String;
+  verify: Boolean;
 }
 
 export interface UserPreviousValuesPromise
@@ -379,6 +391,7 @@ export interface UserPreviousValuesPromise
   name: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
+  verify: () => Promise<Boolean>;
 }
 
 export interface UserPreviousValuesSubscription
@@ -388,6 +401,7 @@ export interface UserPreviousValuesSubscription
   name: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
+  verify: () => Promise<AsyncIterator<Boolean>>;
 }
 
 /*
@@ -402,14 +416,14 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string;
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
-*/
-export type Int = number;
-
-/*
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+*/
+export type Int = number;
 
 export type Long = string;
 
