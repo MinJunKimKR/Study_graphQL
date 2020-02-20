@@ -1,4 +1,5 @@
 import { GraphQLServer, PubSub } from "graphql-yoga";
+import {prisma} from "../generated/prisma-client";
 const pubsub = new PubSub();
 const NEW_CHAT = "NEW_CHAT";
 
@@ -8,22 +9,6 @@ let chattingLog = [{
   description: "HELLO"
 }];
 //기능별 분류 필요
-const typeDefs = ` 
-type Chat {
-  id: Int!
-  writer: String!
-  description: String!
-}
-type Query {
-  chatting: [Chat]!
-}
-type Mutation {
-  write(writer: String!, description : String!):String!
-}
-type Subscription {
-  newChat: Chat
-}
-`;
 const resolvers = {
   Query: {
     chatting: () => {
@@ -31,13 +16,14 @@ const resolvers = {
     }
   },
   Mutation : {
-    write : (_, {writer, description}) =>{
+    write : async (_, {writer, description}) =>{
       const id = chattingLog.length;
       const newChat = {
         id,
         writer,
         description
       };
+      await prisma.createChat({writer: writer, description : description});
       chattingLog.push(newChat); //소스 상단의 채팅 배열(날아감) -> 추후 prisma 추가 필요
       pubsub.publish(NEW_CHAT,{
         newChat
@@ -54,7 +40,7 @@ const resolvers = {
 };
 
 const server = new GraphQLServer({
-  typeDefs: typeDefs,
+  typeDefs: "./src/chat.graphql",
   resolvers: resolvers,
   context: { pubsub }
 });

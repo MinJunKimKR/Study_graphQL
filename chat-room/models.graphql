@@ -1,5 +1,5 @@
 type Chat {
-  id: ID! @id
-  writer : String!
+  id: Int!
+  writer: String!
   description: String!
 }
